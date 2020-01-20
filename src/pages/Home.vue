@@ -1,16 +1,28 @@
 <template>
   <div>
-    <div class="container">
-      <h1>Hello World</h1>
+    <div class="container mt-5">
+      <Card>
+        <div slot="header">
+          Tasks
+        </div>
+        <div slot="main">
+          This is main
+        </div>
+        <div slot="footer">
+            <Button face="primary">Add task</Button>
+        </div>
+      </Card>
     </div>
   </div>
 </template>
 
 <script>
-
+import Card from '../components/Card.vue'
+import Button from '../components/Button.vue'
 export default {
-  created() { 
-    
+  components: {
+    Card,
+    Button
   }
 }
 </script>
