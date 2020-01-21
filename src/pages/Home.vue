@@ -7,9 +7,10 @@
         </div>
         <div slot="main">
           This is main
-          <Input label="Title" type="text" />
-          <Textarea label="Description" type="text" :invalid="true" />
-          <Button fill="primary" extend>Add</Button>
+          <Input label="Title" type="text" v-model="task.title" />
+          <Textarea label="Description" type="text" v-model="task.description"/>
+          <Button fill="primary" extend @click.native="addTask">Add</Button>
+          {{ tasks }}
         </div>
       </Card>
     </div>
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'Vuex'
 import Card from '../components/Card.vue'
 import Button from '../components/Button.vue'
 import Input from '../components/Input.vue'
@@ -27,6 +29,22 @@ export default {
     Button,
     Input,
     Textarea
+  },
+  data() {
+    return {
+      task: {
+        title:null,
+        description:null
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['tasks'])
+  },
+  methods: {
+    addTask() {
+      this.$store.dispatch('setTask', { ...this.task })
+    }
   }
 }
 </script>
