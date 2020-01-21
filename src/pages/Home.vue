@@ -3,13 +3,13 @@
     <div class="container mt-5">
       <Card>
         <div slot="header">
-          Tasks
+          Add task
         </div>
         <div slot="main">
           This is main
-        </div>
-        <div slot="footer">
-            <Button face="primary">Add task</Button>
+          <Input label="Title" type="text" />
+          <Textarea label="Description" type="text" :invalid="true" />
+          <Button fill="primary" extend>Add</Button>
         </div>
       </Card>
     </div>
@@ -19,10 +19,14 @@
 <script>
 import Card from '../components/Card.vue'
 import Button from '../components/Button.vue'
+import Input from '../components/Input.vue'
+import Textarea from '../components/Textarea.vue'
 export default {
   components: {
     Card,
-    Button
+    Button,
+    Input,
+    Textarea
   }
 }
 </script>

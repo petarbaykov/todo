@@ -1,6 +1,6 @@
 <template>
 
-    <button class="btn" :class="typeof face !== 'undefined' ? `btn-${face}` : ''">
+    <button class="btn" :class="getClass">
         <slot></slot>
     </button>
 
@@ -8,9 +8,25 @@
 
 <script>
 export default {
-    props:['face'],
+    props:{
+        fill: String,
+        extend: Boolean
+    },
+    computed: {
+        getClass() {
+            let cl = "";
+            if(typeof this.fill !== 'undefined') {
+                cl += `btn-${this.fill} `
+            }
+            if(typeof this.extend !== 'undefined' && this.extend) {
+                cl += 'btn-block '
+            }
+            
+            return cl
+        }
+    },
     created(){
-        console.log(this.face)
+
     }
 }
 </script>
