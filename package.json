@@ -14,6 +14,7 @@
   "dependencies": {
     "axios": "^0.19.1",
     "purgecss-webpack-plugin": "^1.2.0",
+    "vee-validate": "^3.2.2",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16",
