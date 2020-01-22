@@ -9,6 +9,15 @@
           <Input label="Title" type="text" v-model="task.title" :invalid="errors.title"/>
           <Textarea label="Description" type="text" v-model="task.description" :invalid="errors.description" />
           <Button fill="primary" extend @click.native="addTask">Add</Button>
+          
+        </div>
+      </Card>
+
+      <Card class="mt-5">
+        <div slot="header">
+          Your tasks
+        </div>
+        <div slot="main">
           {{ tasks }}
         </div>
       </Card>
@@ -62,7 +71,7 @@ export default {
       } else {
         this.errors.description = false
       }
-      
+
       //add task
       this.$store.dispatch('setTask', { ...this.task, status:'pending', date: new Date() })
     }
