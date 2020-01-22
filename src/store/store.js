@@ -22,8 +22,13 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    setTask({ commit, state: { tasks } }, task) {
+    async setTask({ commit, dispatch }, task) {
+      let id = await dispatch('getNextId')
+      task.id = id
       commit('setTask', task)
+    },
+    getNextId({ state }) {
+      return state.tasks.length ? state.tasks.reduce((p,c) => (p.id > c.id) ? p : c).id + 1 : 0
     },
     getTasks({ commit }) {
       let tasks = localStorage.getItem("tasks")

@@ -21,7 +21,7 @@
             <List>
                 <ListItem v-for="(task,index) in tasks" :key="index">
                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">{{ task.title }}</h5>
+                      <h5 class="mb-1">#{{ task.id }} {{ task.title }}</h5>
                       <small>{{ new Date(task.date).toLocaleString() }}</small>
                     </div>
                     <p class="mb-1">{{ task.description }}</p>
@@ -70,7 +70,7 @@ export default {
     this.$store.dispatch('getTasks')
   },
   methods: {
-    addTask() {
+    async addTask() {
       // check if task title is empty
       if(!this.task.title) {
         this.errors.title  = true
@@ -89,7 +89,9 @@ export default {
       }
 
       //add task
-      this.$store.dispatch('setTask', { ...this.task, status:'pending', date: new Date() })
+      await this.$store.dispatch('setTask', { ...this.task, status:'pending', date: new Date() })
+      this.task.title = null
+      this.task.description = null
     }
   }
 }
