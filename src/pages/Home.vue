@@ -6,9 +6,8 @@
           Add task
         </div>
         <div slot="main">
-          This is main
-          <Input label="Title" type="text" v-model="task.title" />
-          <Textarea label="Description" type="text" v-model="task.description"/>
+          <Input label="Title" type="text" v-model="task.title" :invalid="errors.title"/>
+          <Textarea label="Description" type="text" v-model="task.description" :invalid="errors.description" />
           <Button fill="primary" extend @click.native="addTask">Add</Button>
           {{ tasks }}
         </div>
@@ -35,6 +34,10 @@ export default {
       task: {
         title:null,
         description:null
+      },
+      errors: {
+        title:false,
+        description:false
       }
     }
   },
@@ -43,7 +46,25 @@ export default {
   },
   methods: {
     addTask() {
-      this.$store.dispatch('setTask', { ...this.task })
+      // check if task title is empty
+      if(!this.task.title) {
+        this.errors.title  = true
+        return
+      } else {
+        this.errors.title = false
+      }
+
+
+      //check if task description is empty
+      if(!this.task.description) {
+        this.errors.description = true
+        return
+      } else {
+        this.errors.description = false
+      }
+      
+      //add task
+      this.$store.dispatch('setTask', { ...this.task, status:'pending', date: new Date() })
     }
   }
 }
