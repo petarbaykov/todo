@@ -19,6 +19,10 @@ const store = new Vuex.Store({
     },
     setTasks(state, payload) {
       state.tasks = payload
+    },
+    finishTask(state, id) {
+      state.tasks = state.tasks.map(t => t.id == id ? { ...t, finished:true } : t)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
     }
   },
   actions: {

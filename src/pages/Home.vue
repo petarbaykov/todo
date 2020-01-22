@@ -23,13 +23,18 @@
                     <div class="d-flex w-100 justify-content-between align-items-center">
                       <div class="mr-4 w-100">
                         <div class="d-flex w-100 justify-content-between align-items-center">
-                          <h5 class="mb-1">#{{ task.id }} {{ task.title }}</h5>
+                          <h5 class="mb-1">
+                              #{{ task.id }} {{ task.title }} 
+                            </h5>
                           <small class="badge badge-dark">{{ new Date(task.date).toLocaleString() }}</small>
                         </div>
                         <p class="mb-1">{{ task.description }}</p>
                       </div>
                       <Button fill="danger">
                         Remove
+                      </Button>
+                      <Button fill="success" v-if="!task.finished" @click.native="finish(task.id)">
+                        Done
                       </Button>
                     </div>
                 </ListItem>
@@ -96,9 +101,12 @@ export default {
       }
 
       //add task
-      await this.$store.dispatch('setTask', { ...this.task, status:'pending', date: new Date() })
+      await this.$store.dispatch('setTask', { ...this.task, finished:false, date: new Date() })
       this.task.title = null
       this.task.description = null
+    },
+    finish(id) {
+      this.$store.commit('finishTask', id)
     }
   }
 }
