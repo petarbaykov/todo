@@ -18,7 +18,15 @@
           Your tasks
         </div>
         <div slot="main">
-          {{ tasks }}
+            <List>
+                <ListItem v-for="(task,index) in tasks" :key="index">
+                   <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{ task.title }}</h5>
+                      <small>{{ new Date(task.date).toLocaleString() }}</small>
+                    </div>
+                    <p class="mb-1">{{ task.description }}</p>
+                </ListItem>
+            </List>
         </div>
       </Card>
     </div>
@@ -31,12 +39,17 @@ import Card from '../components/Card.vue'
 import Button from '../components/Button.vue'
 import Input from '../components/Input.vue'
 import Textarea from '../components/Textarea.vue'
+import List from '../components/List.vue'
+import ListItem  from '../components/ListItem.vue'
+
 export default {
   components: {
     Card,
     Button,
     Input,
-    Textarea
+    Textarea,
+    List,
+    ListItem
   },
   data() {
     return {

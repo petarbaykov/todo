@@ -15,10 +15,11 @@ const store = new Vuex.Store({
   mutations: {
     setTask(state, payload) {
       state.tasks.push(payload)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
     } 
   },
   actions: {
-    setTask({ commit }, task) {
+    setTask({ commit, state: { tasks } }, task) {
       commit('setTask', task)
     }
   },
