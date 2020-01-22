@@ -66,6 +66,9 @@ export default {
   computed: {
     ...mapGetters(['tasks'])
   },
+  created() {
+    this.$store.dispatch('getTasks')
+  },
   methods: {
     addTask() {
       // check if task title is empty

@@ -16,11 +16,21 @@ const store = new Vuex.Store({
     setTask(state, payload) {
       state.tasks.push(payload)
       localStorage.setItem("tasks",JSON.stringify(state.tasks))
-    } 
+    },
+    setTasks(state, payload) {
+      state.tasks = payload
+    }
   },
   actions: {
     setTask({ commit, state: { tasks } }, task) {
       commit('setTask', task)
+    },
+    getTasks({ commit }) {
+      let tasks = localStorage.getItem("tasks")
+      if(tasks) {
+        tasks = JSON.parse(tasks)
+        commit('setTasks', tasks)
+      }
     }
   },
   modules: {
