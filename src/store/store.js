@@ -14,12 +14,32 @@ const store = new Vuex.Store({
   },
   mutations: {
     setTask(state, payload) {
-      state.tasks.push(payload)
-    } 
+      state.tasks.unshift(payload)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    },
+    setTasks(state, payload) {
+      state.tasks = payload
+    },
+    finishTask(state, id) {
+      state.tasks = state.tasks.map(t => t.id == id ? { ...t, finished:true } : t)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    }
   },
   actions: {
-    setTask({ commit }, task) {
+    async setTask({ commit, dispatch }, task) {
+      let id = await dispatch('getNextId')
+      task.id = id
       commit('setTask', task)
+    },
+    getNextId({ state }) {
+      return state.tasks.length ? state.tasks.reduce((p,c) => (p.id > c.id) ? p : c).id + 1 : 0
+    },
+    getTasks({ commit }) {
+      let tasks = localStorage.getItem("tasks")
+      if(tasks) {
+        tasks = JSON.parse(tasks)
+        commit('setTasks', tasks)
+      }
     }
   },
   modules: {

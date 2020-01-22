@@ -2,7 +2,7 @@
 
     <div class="form-group">
         <label> {{ label }} </label>
-        <textarea class="form-control" :class="invalid ? 'is-invalid' : ''" ref="input" @input="update" :value="value"></textarea>
+        <textarea class="form-control" rows="5" :class="invalid ? 'is-invalid' : ''" ref="input" @input="update" :value="value"></textarea>
     </div>
 
 </template>
