@@ -14,7 +14,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     setTask(state, payload) {
-      state.tasks.push(payload)
+      state.tasks.unshift(payload)
       localStorage.setItem("tasks",JSON.stringify(state.tasks))
     },
     setTasks(state, payload) {
