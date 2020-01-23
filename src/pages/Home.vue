@@ -31,7 +31,7 @@
                         </div>
                         <p class="mb-1">{{ task.description }}</p>
                       </div>
-                      <Button fill="danger">
+                      <Button fill="danger" @click.native="remove(task.id)">
                         Remove
                       </Button>
                       <Button fill="success" v-if="!task.finished" @click.native="finish(task.id)">
@@ -108,6 +108,9 @@ export default {
     },
     finish(id) {
       this.$store.commit('finishTask', id)
+    },
+    remove(id){
+      this.$store.commit('removeTask',id)
     }
   }
 }
