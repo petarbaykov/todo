@@ -1,11 +1,11 @@
-# Sample Vue.js Boilerplate
+# Todo App
 
 
 ## Overview
-
+This is project for university class - Framework systems
 
 ### How it works
-
+This is app allows you to add todos
 
 
 ## Installation
