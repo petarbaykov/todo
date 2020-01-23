@@ -7,9 +7,10 @@ import store from './store/store'
 import { ValidationProvider } from 'vee-validate';
 import * as validation from './store/ui/validation'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faCheck)
+library.add(faTrashAlt)
 
 Vue.component('icon', FontAwesomeIcon)
 import 'bootstrap/dist/css/bootstrap.min.css'

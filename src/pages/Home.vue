@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container mt-5">
-      <Card>
+      <Card class="bg-light shadow-sm">
         <div slot="header">
           Add task
         </div>
@@ -12,36 +12,30 @@
           
         </div>
       </Card>
-
-      <Card class="mt-5">
-        <div slot="header">
-          Your tasks
-        </div>
-        <div slot="main">
-            <List>
-                <ListItem v-for="(task,index) in tasks" :key="index" :class="task.finished ? 'bg-light' : ''">
-                    <div class="d-flex w-100 justify-content-between align-items-center">
-                      <icon icon="check" />
-                      <div class="mr-4 w-100">
-                        <div class="d-flex w-100 justify-content-between align-items-center">
-                          <h5 class="mb-1">
-                              #{{ task.id }} {{ task.title }} 
-                            </h5>
-                          <!-- <small class="badge badge-dark">{{ new Date(task.date).toLocaleString() }}</small> -->
-                        </div>
-                        <p class="mb-1">{{ task.description }}</p>
-                      </div>
-                      <Button fill="danger" @click.native="remove(task.id)">
-                        Remove
-                      </Button>
-                      <Button fill="success" v-if="!task.finished" @click.native="finish(task.id)">
-                        Done
-                      </Button>
-                    </div>
-                </ListItem>
-            </List>
-        </div>
-      </Card>
+      <List class="mt-2">
+          <ListItem v-for="(task,index) in tasks" :key="index" :class="task.finished ? 'bg-dark text-white' : ''">
+              <div class="d-flex w-100 justify-content-between align-items-center">
+                <Button fill="outline-success"  class="mr-3 opacity-5" v-if="!task.finished" @click.native="finish(task.id)">
+                  <icon icon="check" />
+                </Button>
+                <Button fill="success"  class="mr-3" v-if="task.finished">
+                  <icon icon="check" />
+                </Button>
+                <div class="mr-4 w-100">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        #{{ task.id }} {{ task.title }} 
+                      </h5>
+                  </div>
+                  <p class="mb-1" :class="task.finished ? 'text-scratched' : ''">{{ task.description }}</p>
+                </div>
+                <Button fill="outline-danger" @click.native="remove(task.id)">
+                  <icon icon="trash-alt" />
+                </Button>
+                
+              </div>
+          </ListItem>
+      </List>
     </div>
   </div>
 </template>
@@ -115,3 +109,15 @@ export default {
   }
 }
 </script>
+<style scoped>
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+.opacity-5 {
+  opacity:0.5;
+}
+.text-scratched {
+  text-decoration: line-through;
+}
+</style>  
