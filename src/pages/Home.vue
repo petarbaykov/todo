@@ -19,14 +19,15 @@
         </div>
         <div slot="main">
             <List>
-                <ListItem v-for="(task,index) in tasks" :key="index">
+                <ListItem v-for="(task,index) in tasks" :key="index" :class="task.finished ? 'bg-light' : ''">
                     <div class="d-flex w-100 justify-content-between align-items-center">
+                      <icon icon="check" />
                       <div class="mr-4 w-100">
                         <div class="d-flex w-100 justify-content-between align-items-center">
                           <h5 class="mb-1">
                               #{{ task.id }} {{ task.title }} 
                             </h5>
-                          <small class="badge badge-dark">{{ new Date(task.date).toLocaleString() }}</small>
+                          <!-- <small class="badge badge-dark">{{ new Date(task.date).toLocaleString() }}</small> -->
                         </div>
                         <p class="mb-1">{{ task.description }}</p>
                       </div>
