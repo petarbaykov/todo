@@ -1,7 +1,7 @@
 {
-  "name": "vue-js-boilerplate",
-  "version": "0.1.0",
-  "description": "Basic Vue js App Example",
+  "name": "todoapp",
+  "version": "0.0.2",
+  "description": "VueJS Todo App",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
