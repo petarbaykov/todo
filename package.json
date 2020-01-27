@@ -1,11 +1,11 @@
 {
-  "name": "vue-js-boilerplate",
-  "version": "0.1.0",
-  "description": "Basic Vue js App Example",
+  "name": "todoapp",
+  "version": "0.0.2",
+  "description": "VueJS Todo App",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "SET NODE_ENV='prod' && webpack -p",
+    "build": "NODE_ENV='prod' webpack -p",
     "start:dev": "SET NODE_ENV='dev' && webpack-dev-server --config ./webpack.config.js"
   },
   "main": "src/index.js",
