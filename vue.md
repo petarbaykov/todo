@@ -80,12 +80,12 @@ $ npm install vue
 
 # Известни копании и проекети, които използват Vue
 Част от тези компании използват Vue в малки отделните компоненти от техните продукти или са изградени изцяло с Vue
-- Facebook
-- Netflix
-- Adobe
-- Xiaomi
-- Alibaba
-- WizzAir
-- Laracasts
-- GitLab
-- Behance
+##### Facebook
+##### Netflix
+##### Adobe
+##### Xiaomi
+##### Alibaba
+##### WizzAir
+##### Laracasts
+##### GitLab
+##### Behance
