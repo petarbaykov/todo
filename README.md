@@ -2,7 +2,7 @@
 
 
 ## Overview
-This is project for university class - Framework systems
+This is project for university class - Framework systems. Demo here https://vuejs-todo-app.herokuapp.com/
 
 ### How it works
 This is app allows you to add todos
