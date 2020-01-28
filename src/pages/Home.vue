@@ -120,4 +120,7 @@ export default {
 .text-scratched {
   text-decoration: line-through;
 }
+textarea {
+    resize:none !important;
+}
 </style>  
