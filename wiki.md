@@ -61,3 +61,19 @@ export default {
 </script>
 
 ```
+
+## Vue Router (Рутер)
+В router/index.js създаваме инстанция на рутера, а в router/routes.js регистрираме пътищата в приложението. 
+routes.js файла изглежда така:
+```js
+import Home from '../pages/Home.vue'
+export default [
+    {
+      path: '/',
+      name: 'home',
+      component: Home,
+      props: route => ({ query: route.query })
+    }
+]
+```
+
