@@ -76,4 +76,89 @@ export default [
     }
 ]
 ```
+## Home.vue
+В този файл е нашата основна страница на приложението. В нея се сглобяват всички компоненти на приложенито. В нея се извършва и функционалността на приложнието, а именно до добавяне на задачи. Добавените задачи не се съхраняват в с стейта на тази страница, а използваме Vuex Store. Във всеки vue файла е допустимо добавянето на стилове в style таг. В Home.vue сме добавили всикич създадени компоненти от папката components. Добавят се чрез JavaScript импорт. Част от кода нa Home.vue:
+```vue
+<script>
+import Card from '../components/Card.vue'
+import Button from '../components/Button.vue'
+import Input from '../components/Input.vue'
+import Textarea from '../components/Textarea.vue'
+import List from '../components/List.vue'
+import ListItem  from '../components/ListItem.vue'
 
+export default {
+  components: {
+    Card,
+    Button,
+    Input,
+    Textarea,
+    List,
+    ListItem
+  },
+  
+}
+</script>
+```
+
+### Vue Store
+В това приложение използваме Vuex Store, защото искаме нашите добавени задачи да са достъпни в цялото приложение, а не само в определена страница или компонент. 
+"Store" е основно контейнер, който съхранява състоянието на приложението ни. Има две неща, които правят "Store" Vuex различен от обикновен глобален обект:
+
+"Store" на Vuex са реактивни. Когато компонентите на Vue извлекат състояние от него, те ще се актуализират, ако състоянието на данните се промени.
+
+Не можете директно да мутирате състоянието на stor-a. Единственият начин да промените състоянието на stor-a е чрез изрично извършване на мутации. Това гарантира, че всяка промяна в състоянието оставя запис, който може да се проследи.
+#### Getters
+Създава getter за някоя стойност от стейта. В нашето приложение имаме един getter:
+```js
+getters: {
+    tasks({ tasks }){
+      return tasks
+    }
+},
+```
+#### Mutations(Мутации)
+Чрез мутациите променяме стейта на приложението. В нашето приложениет има четири мутации:
+```js
+mutations: {
+    setTask(state, payload) {
+      state.tasks.unshift(payload)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    },
+    setTasks(state, payload) {
+      state.tasks = payload
+    },
+    finishTask(state, id) {
+      state.tasks = state.tasks.map(t => t.id == id ? { ...t, finished:true } : t)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    },
+    removeTask(state, id) {
+      state.tasks = state.tasks.filter(t => t.id !== id)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    }
+}
+```
+#### Actions
+Actions са подобни на мутациите, като разликите e, че:
+* Вместо да мутира стейта, actions извършват мутации.
+* Actions могат да съдържат произволни асинхронни операции.
+
+В нашето приложение имаме три actions:
+```js
+actions: {
+    async setTask({ commit, dispatch }, task) {
+      let id = await dispatch('getNextId')
+      task.id = id
+      commit('setTask', task)
+    },
+    getNextId({ state }) {
+      return state.tasks.length ? state.tasks.reduce((p,c) => (p.id > c.id) ? p : c).id + 1 : 0
+    },
+    getTasks({ commit }) {
+      let tasks = localStorage.getItem("tasks")
+      if(tasks) {
+        tasks = JSON.parse(tasks)
+        commit('setTasks', tasks)
+      }
+}
+```
