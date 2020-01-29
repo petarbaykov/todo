@@ -76,4 +76,27 @@ export default [
     }
 ]
 ```
+## Home.vue
+В този файл е нашата основна страница на приложението. В нея се сглобяват всички компоненти на приложенито. В нея се извършва и функционалността на приложнието, а именно до добавяне на задачи. Добавените задачи не се съхраняват в с стейта на тази страница, а използване Vue Store. Във всеки vue файла е допустимо добавянето на стилове в style таг. В Home.vue сме добавили всикич създадени компоненти от папката components. Добавят се чрез JavaScript импорт. Част от кода нa Home.vue:
+```vue
+<script>
+import Card from '../components/Card.vue'
+import Button from '../components/Button.vue'
+import Input from '../components/Input.vue'
+import Textarea from '../components/Textarea.vue'
+import List from '../components/List.vue'
+import ListItem  from '../components/ListItem.vue'
 
+export default {
+  components: {
+    Card,
+    Button,
+    Input,
+    Textarea,
+    List,
+    ListItem
+  },
+  
+}
+</script>
+```
