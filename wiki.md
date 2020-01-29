@@ -109,10 +109,56 @@ export default {
 
 Не можете директно да мутирате състоянието на stor-a. Единственият начин да промените състоянието на stor-a е чрез изрично извършване на мутации. Това гарантира, че всяка промяна в състоянието оставя запис, който може да се проследи.
 #### Getters
-Създава getter за някоя стойност от стейта
+Създава getter за някоя стойност от стейта. В нашето приложение имаме един getter:
+```js
+getters: {
+    tasks({ tasks }){
+      return tasks
+    }
+},
+```
 #### Mutations(Мутации)
-Чрез мутациите променяме стейта на приложението
+Чрез мутациите променяме стейта на приложението. В нашето приложениет има четири мутации:
+```js
+mutations: {
+    setTask(state, payload) {
+      state.tasks.unshift(payload)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    },
+    setTasks(state, payload) {
+      state.tasks = payload
+    },
+    finishTask(state, id) {
+      state.tasks = state.tasks.map(t => t.id == id ? { ...t, finished:true } : t)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    },
+    removeTask(state, id) {
+      state.tasks = state.tasks.filter(t => t.id !== id)
+      localStorage.setItem("tasks",JSON.stringify(state.tasks))
+    }
+}
+```
 #### Actions
 Actions са подобни на мутациите, като разликите e, че:
 * Вместо да мутира стейта, actions извършват мутации.
 * Actions могат да съдържат произволни асинхронни операции.
+
+В нашето приложение имаме три actions:
+```js
+actions: {
+    async setTask({ commit, dispatch }, task) {
+      let id = await dispatch('getNextId')
+      task.id = id
+      commit('setTask', task)
+    },
+    getNextId({ state }) {
+      return state.tasks.length ? state.tasks.reduce((p,c) => (p.id > c.id) ? p : c).id + 1 : 0
+    },
+    getTasks({ commit }) {
+      let tasks = localStorage.getItem("tasks")
+      if(tasks) {
+        tasks = JSON.parse(tasks)
+        commit('setTasks', tasks)
+      }
+}
+```
